@@ -1,0 +1,43 @@
+<head>
+    <title>Dashboard - Script_Com</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+       {% if messages %}
+    {% for message in messages %}
+        <script>alert("{{ message|escapejs }}");</script>
+    {% endfor %}
+{% endif %}
+    
+    <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold text-center text-gray-700">Welcome to Your Dashboard</h2>
+        <form action="/dashboard/newscript" method="POST" class="space-y-4">
+            <div>
+                <label for="scriptTitle" class="block text-sm font-medium text-gray-600">Enter Script Title</label>
+                <input type="text" id="scriptTitle" name="scriptTitle" required
+                       class="w-full px-4 py-2 mt-1 text-gray-700 bg-gray-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       placeholder="e.g., My New Script">
+            </div>
+            
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-600">Enter Your Email</label>
+                <input type="email" id="email" name="email" required
+                       class="w-full px-4 py-2 mt-1 text-gray-700 bg-gray-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       placeholder="e.g., example@email.com">
+            </div>
+
+            <button type="submit"
+                    class="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Get Started
+            </button>
+        </form>
+        
+        <div class="text-center">
+            <p class="text-sm text-gray-600">Already have a code?</p>
+            <a href="/dashboard/myscript"
+               class="inline-block px-4 py-2 mt-2 text-blue-500 bg-transparent border border-blue-500 rounded-lg hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Enter Your Code
+            </a>
+        </div>
+    </div>
+</body>

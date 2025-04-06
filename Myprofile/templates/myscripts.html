@@ -1,0 +1,69 @@
+<head>
+    <title>My Scripts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-lg font-semibold text-gray-700">Script_Com</div>
+                <div class="flex space-x-4">
+                    <a href="/" class="text-gray-600 hover:text-red-500">Exit</a>
+                    <a href="/dashboard/newscript" class="text-gray-600 hover:text-green-500">Create Script</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto mt-6 px-4">
+        <form method="GET" action="/myprofile/profile" class="flex items-center space-x-4">
+            <input 
+                type="text" 
+                name="key" 
+                placeholder="Enter your script key..." 
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                required
+            >
+            <button 
+                type="submit" 
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            >
+                Search
+            </button>
+        </form>
+    </div>
+    {% if messages %}
+        <div class="container mx-auto px-4 mt-4">
+            {% for message in messages %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Alert:</strong>
+                    <span class="block sm:inline">{{ message }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="container mx-auto py-8 px-4">
+        <h2 class="text-2xl font-bold mb-6 text-center text-gray-700">Your Scripts</h2>
+        {% if script_list %}
+            <div class="space-y-6">
+                {% for script in script_list %}
+                    <section id="{{ script.id }}" class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">{{ script.title }}</h3>
+                                <p class="text-gray-500 text-sm">Created on: {{ script.date }}</p>
+                            </div>
+                            {% if script.id %}
+                                <a href="/myprofile/delete/{{ script.id }}" class="text-red-500 hover:text-red-700 text-sm font-semibold">
+                                    Delete
+                                </a>
+                            {% endif %}
+                        </div>
+                    </section>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-gray-600 mt-12 text-lg">No scripts available to show.</p>
+        {% endif %}
+    </div>
+</body>
+
